@@ -3,7 +3,8 @@ import axios from 'axios'
 
 //constants
 const datainit = {
-    array: []
+    array: [],
+    offset: 0
 }
 
 const getPokemon = 'pokemon exitoso'
@@ -13,6 +14,7 @@ export default function pokeReducer(state = datainit, action) {
     switch (action.type) {
         case getPokemon:
             return { ...state, array: action.payload }
+            
         default:
             return state
 
@@ -23,7 +25,8 @@ export default function pokeReducer(state = datainit, action) {
 //actions
 export const GetPokeAction = () => async (dispatch, getstate) => {
     try {
-        const res = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100&offset=200')
+        
+        const res = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20&offset=200')
         dispatch({
             type: getPokemon,
             payload: res.data.results
